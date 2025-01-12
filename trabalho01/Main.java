@@ -45,8 +45,9 @@ public class Main {
                             System.err.println("Digite um valor valido");
                             scan.nextLine();
                         }
-                       
-                    } scan.nextLine();
+
+                    }
+                    scan.nextLine();
                     System.err.println("Digite o status do sobrevivente: ");
                     System.err.println("Status disponiveis: ");
                     for (Status status : Status.values()) {
@@ -73,7 +74,7 @@ public class Main {
                     if (vault.getSobreviventes().size() != 0) {
                         System.err.println("Sobreviventes disponiveis: ");
                         vault.imprimirNomeSobreviventes();
-                        
+
                         System.err.println("Digite o nome do sobrevivente que deseja adicionar a habilidade: ");
                         String nome = scan.nextLine();
                         System.err.println("Digite a habilidade a adicionar : ");
@@ -90,7 +91,7 @@ public class Main {
                             } catch (IllegalArgumentException e) {
                                 System.err.println("Digite uma habilidade valida");
                             }
-                            
+
                         }
                         vault.adicionarHabilidade(nome, habilidade);
                     } else {
