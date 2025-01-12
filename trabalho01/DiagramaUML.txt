@@ -100,6 +100,7 @@ class Pessoa {
         -nome: String
         -idade: int
         -ID: String
+        +gerarIDMenor():String
         +Pessoa(nome: String, idade: int)
         +getNome(): String
         +getIdade(): int

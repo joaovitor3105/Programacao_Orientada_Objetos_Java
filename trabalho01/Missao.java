@@ -11,13 +11,13 @@ public class Missao {
     private List<Recursos> recursos;
     private Status_Missao status;
 
-    public Missao(String nome, String objetivo, String local) {
+    public Missao(String nome, String objetivo, String local, Status_Missao status_missao) {
         this.nome = nome;
         this.objetivo = objetivo;
         this.local = local;
         this.sobreviventes = new ArrayList<Sobrevivente>();
         this.recursos = new ArrayList<Recursos>();
-        this.status = Status_Missao.Em_Andamento;
+        this.status = status_missao;
 
     }
 

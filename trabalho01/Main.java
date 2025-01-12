@@ -5,33 +5,32 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.err.println("Bem-vindo ao  Vault ");
+        System.out.println("Bem-vindo ao  Vault ");
         Vault vault = new Vault();
         int op;
-
         while (true) {
-            System.err.println("----------------------------------------------------------------");
-            System.err.println("     MENU do Vault");
-            System.err.println("1-Adicionar Sobrevivente");
-            System.err.println("2-Adicionar Habilidade a um sobrevivente");
-            System.err.println("3-Remover Habilidade de um sobrevivente");
-            System.err.println("4-Adicionar Recurso ao Vault");
-            System.err.println("5-Consumir Recurso do Vault");
-            System.err.println("6-Registrar Missao");
-            System.err.println("7-Adicionar Sobrevivente a Missao");
-            System.err.println("8-Exibir Sobreviventes do Vault");
-            System.err.println("9-Exibir Recursos do Vault");
-            System.err.println("10-Exibir Missoes do Vault");
-            System.err.println("11-Exibir Sobreviventes cadastrados em uma Missao");
-            System.err.println("12-Sair");
-            System.err.println("----------------------------------------------------------------");
+            System.out.println("----------------------------------------------------------------");
+            System.out.println("     MENU do Vault");
+            System.out.println("1-Adicionar Sobrevivente");
+            System.out.println("2-Adicionar Habilidade a um sobrevivente");
+            System.out.println("3-Remover Habilidade de um sobrevivente");
+            System.out.println("4-Adicionar Recurso ao Vault");
+            System.out.println("5-Consumir Recurso do Vault");
+            System.out.println("6-Registrar Missao");
+            System.out.println("7-Adicionar Sobrevivente a Missao");
+            System.out.println("8-Exibir Sobreviventes do Vault");
+            System.out.println("9-Exibir Recursos do Vault");
+            System.out.println("10-Exibir Missoes do Vault");
+            System.out.println("11-Exibir Sobreviventes cadastrados em uma Missao");
+            System.out.println("12-Sair");
+            System.out.println("----------------------------------------------------------------");
             op = scan.nextInt();
             scan.nextLine();
             switch (op) {
                 case 1: {
-                    System.err.println("Digite o nome do sobrevivente: ");
+                    System.out.println("Digite o nome do sobrevivente: ");
                     String nome = scan.nextLine();
-                    System.err.println("Digite a idade do sobrevivente: ");
+                    System.out.println("Digite a idade do sobrevivente: ");
                     int idade;
                     while (true) {
                         try {
@@ -39,7 +38,7 @@ public class Main {
                             if (idade >= 0) {
                                 break;
                             } else {
-                                System.err.println("Digite um valor valido");
+                                System.out.println("Digite um valor valido");
                             }
                         } catch (Exception e) {
                             System.err.println("Digite um valor valido");
@@ -48,10 +47,10 @@ public class Main {
 
                     }
                     scan.nextLine();
-                    System.err.println("Digite o status do sobrevivente: ");
-                    System.err.println("Status disponiveis: ");
+                    System.out.println("Digite o status do sobrevivente: ");
+                    System.out.println("Status disponiveis: ");
                     for (Status status : Status.values()) {
-                        System.err.println(status);
+                        System.out.println(status);
                     }
                     Status status;
                     while (true) {
@@ -66,21 +65,21 @@ public class Main {
                         break;
                     }
                     vault.adicionarSobrevivente(new Sobrevivente(nome, idade, status));
-                    System.err.println("Sobrevivente adicionado com sucesso");
+                    System.out.println("Sobrevivente adicionado com sucesso");
                     break;
                 }
 
                 case 2: {
                     if (vault.getSobreviventes().size() != 0) {
-                        System.err.println("Sobreviventes disponiveis: ");
-                        vault.imprimirNomeSobreviventes();
+                        System.out.println("Sobreviventes disponiveis: ");
+                        vault.imprimirSobreviventes();
 
-                        System.err.println("Digite o nome do sobrevivente que deseja adicionar a habilidade: ");
-                        String nome = scan.nextLine();
-                        System.err.println("Digite a habilidade a adicionar : ");
-                        System.err.println("Habilidades disponiveis: ");
+                        System.out.println("Digite o ID do sobrevivente que deseja adicionar a habilidade: ");
+                        String IDadicionar = scan.nextLine();
+                        System.out.println("Digite a habilidade a adicionar : ");
+                        System.out.println("Habilidades disponiveis: ");
                         for (Habilidade habilidade : Habilidade.values()) {
-                            System.err.println(habilidade);
+                            System.out.println(habilidade);
                         }
                         Habilidade habilidade;
                         while (true) {
@@ -93,7 +92,7 @@ public class Main {
                             }
 
                         }
-                        vault.adicionarHabilidade(nome, habilidade);
+                        vault.adicionarHabilidade(IDadicionar, habilidade);
                     } else {
                         System.err.println("Nao existem sobreviventes cadastrados");
                     }
@@ -103,11 +102,11 @@ public class Main {
                 case 3: {
 
                     if (vault.getSobreviventes().size() != 0) {
-                        System.err.println("Sobreviventes disponiveis: ");
-                        vault.imprimirNomeSobreviventes();
-                        System.err.println("Digite o nome do sobrevivente para remover a habilidade: ");
-                        String nome = scan.nextLine();
-                        vault.removerHabilidade(nome);
+                        System.out.println("Sobreviventes disponiveis: ");
+                        vault.imprimirSobreviventes();
+                        System.out.println("Digite o ID do sobrevivente para remover a habilidade: ");
+                        String IDremoverhabilidade = scan.nextLine();
+                        vault.removerHabilidade(IDremoverhabilidade);
                         break;
 
                     } else {
@@ -117,11 +116,11 @@ public class Main {
                 }
 
                 case 4: {
-                    System.err.println("Recursos Disponiveis: ");
+                    System.out.println("Recursos Disponiveis: ");
                     for (Nome nome : Nome.values()) {
                         System.err.println(nome);
                     }
-                    System.err.println("Digite o nome do recurso a ser adicionado: ");
+                    System.out.println("Digite o nome do recurso a ser adicionado: ");
                     Nome nome_recurso;
                     while (true) {
 
@@ -135,7 +134,7 @@ public class Main {
                         break;
                     }
 
-                    System.err.println("Digite a quantidade do recurso: ");
+                    System.out.println("Digite a quantidade do recurso: ");
                     int quantidade;
                     while (true) {
                         try {
@@ -157,9 +156,9 @@ public class Main {
 
                 case 5: {
 
-                    System.err.println("Recursos Disponiveis: ");
+                    System.out.println("Recursos Disponiveis: ");
                     vault.imprimirRecursos();
-                    System.err.println("Digite o nome do recurso a ser consumido: ");
+                    System.out.println("Digite o nome do recurso a ser consumido: ");
                     Nome nome_recurso;
                     while (true) {
 
@@ -173,7 +172,7 @@ public class Main {
                         break;
                     }
 
-                    System.err.println("Digite a quantidade do recurso a ser consumido: ");
+                    System.out.println("Digite a quantidade do recurso a ser consumido: ");
                     int quantidade;
                     while (true) {
                         try {
@@ -190,27 +189,45 @@ public class Main {
 
                     vault.consumirRecurso(nome_recurso, quantidade);
                     break;
-
                 }
+
                 case 6: {
-                    System.err.println("Digite o nome da missao: ");
+                    System.out.println("Digite o nome da missao: ");
                     String nome = scan.nextLine();
-                    System.err.println("Digite o objetivo da missao: ");
+                    System.out.println("Digite o objetivo da missao: ");
                     String objetivo = scan.nextLine();
-                    System.err.println("Digite o local da missao: ");
+                    System.out.println("Digite o local da missao: ");
                     String local = scan.nextLine();
-                    vault.adicionarMissao(new Missao(nome, objetivo, local));
+                    for (Status status : Status.values()) {
+                        System.out.println(status);
+                    }
+                    Status_Missao status_missao;
+                    while (true) {
+
+                        try {
+                            status_missao = Status_Missao.valueOf(scan.nextLine());
+
+                        } catch (IllegalArgumentException e) {
+                            System.err.println("Digite um status valido");
+                            continue;
+                        }
+                        break;
+                    }
+                    vault.adicionarMissao(new Missao(nome, objetivo, local, status_missao));
                     break;
                 }
+
                 case 7: {
                     if (vault.getMissoes().size() != 0 && vault.getSobreviventes().size() != 0) {
                         vault.imprimirMissoes();
-                        System.err.println("Digite o nome da missao para adicionar sobreviventes: ");
+                        System.out.println("Digite o nome da missao para adicionar sobreviventes: ");
                         String nomeMissao = scan.nextLine();
-                        vault.imprimirNomeSobreviventes();
-                        System.err.println("Digite o nome do sobrevivente a ser adicionado a missao: ");
-                        String nomeSobrevivente = scan.nextLine();
-                        vault.adicionarSobreviventeMissao(nomeSobrevivente, nomeMissao);
+                        vault.imprimirSobreviventes();
+                        System.out.println("Digite o ID do sobrevivente a ser adicionado a missao: ");
+                        String IDsobrevivente = scan.nextLine();
+                        vault.adicionarSobreviventeMissao(IDsobrevivente, nomeMissao);
+                    } else {
+                        System.err.println("Não há missoes ou sobreviventes cadastrados");
                     }
 
                 }
@@ -245,7 +262,7 @@ public class Main {
                 case 11: {
                     if (vault.getMissoes().size() != 0) {
                         vault.imprimirMissoes();
-                        System.err.println("Digite o nome da missao para exibir os sobreviventes: ");
+                        System.out.println("Digite o nome da missao para exibir os sobreviventes: ");
                         String nomeMissao = scan.nextLine();
                         Missao missao = vault.procurarMissao(nomeMissao);
                         if (missao != null) {
@@ -260,14 +277,15 @@ public class Main {
                 }
 
                 case 12: {
-                    System.err.println("Desativando o Vault...");
+                    System.out.println("Desativando o Vault...");
+                    scan.close();
                     System.exit(0);
                     break;
 
                 }
 
                 default: {
-                    System.err.println("Digite uma opcao valida");
+                    System.out.println("Digite uma opcao valida");
                     break;
                 }
             }

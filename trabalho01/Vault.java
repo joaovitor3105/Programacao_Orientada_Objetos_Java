@@ -40,9 +40,9 @@ public class Vault {
         missoes.add(missao);
     }
 
-    public Sobrevivente procurarSobrevivente(String nome) {
+    public Sobrevivente procurarSobrevivente(String ID) {
         for (Sobrevivente sobrevivente : sobreviventes) {
-            if (sobrevivente.getNome().equals(nome)) {
+            if (sobrevivente.getID().equals(ID)) {
                 return sobrevivente;
             }
         }
@@ -58,9 +58,9 @@ public class Vault {
         return null;
     }
 
-    public void adicionarHabilidade(String nome, Habilidade habilidade) {
-        Sobrevivente sobrevivente = procurarSobrevivente(nome);
-        
+    public void adicionarHabilidade(String ID, Habilidade habilidade) {
+        Sobrevivente sobrevivente = procurarSobrevivente(ID);
+
         if (sobrevivente == null) {
             System.err.println("Sobrevivente não encontrado");
             return;
@@ -71,8 +71,6 @@ public class Vault {
             return;
         }
 
-        
-        
         else {
             sobrevivente.adicionarHabilidade(habilidade);
             System.err.println("Habilidade adicionada com sucesso");
@@ -80,9 +78,9 @@ public class Vault {
         }
     }
 
-    public void removerHabilidade(String nome) {
+    public void removerHabilidade(String ID) {
         Scanner Scan = new Scanner(System.in);
-        Sobrevivente sobrevivente = procurarSobrevivente(nome);
+        Sobrevivente sobrevivente = procurarSobrevivente(ID);
         if (sobrevivente != null) {
             sobrevivente.imprimirHabilidades();
             System.err.println("Digite a habilidade a remover: ");
@@ -104,6 +102,7 @@ public class Vault {
         } else {
             System.err.println("Sobrevivente nao encontrado");
         }
+        Scan.close();
 
     }
 
@@ -154,8 +153,8 @@ public class Vault {
         }
     }
 
-    public void adicionarSobreviventeMissao(String nome, String nomeMissao) {
-        Sobrevivente sobrevivente = procurarSobrevivente(nome);
+    public void adicionarSobreviventeMissao(String ID, String nomeMissao) {
+        Sobrevivente sobrevivente = procurarSobrevivente(ID);
         Missao missao = procurarMissao(nomeMissao);
         if (missao != null && sobrevivente != null && missao.getSobreviventes().size() < 5) {
             missao.adicionarSobrevivente(sobrevivente);

@@ -10,7 +10,14 @@ public class Pessoa {
     public Pessoa(String nome, int idade) {
         this.nome = nome;
         this.idade = idade;
-        this.ID = UUID.randomUUID().toString();
+        this.ID = gerarIDMenor();
+    }
+
+    public String gerarIDMenor() {
+        ID = UUID.randomUUID().toString();
+        return ID.substring(0, 4);
+        // reduzindo o tamanho do ID porém em caso de adicionar mais de 100 pessoas
+        // recomendado aumentar o tamanho para 8;
     }
 
     public String getNome() {
