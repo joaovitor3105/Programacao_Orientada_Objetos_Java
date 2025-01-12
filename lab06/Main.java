@@ -257,6 +257,7 @@ public class Main {
 
                 case 7:
                     System.out.println("Saindo...");
+                    scanner.close();
                     System.exit(0);
                     break;
 
@@ -266,6 +267,5 @@ public class Main {
 
             }
         }
-
     }
 }
