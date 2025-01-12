@@ -2,12 +2,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-enum Status_Missao {
-    Em_Andamento,
-    Sucesso,
-    Fracasso
-}
-
 public class Missao {
 
     private String nome;

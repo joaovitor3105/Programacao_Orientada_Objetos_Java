@@ -1,8 +1,4 @@
 
-enum Nome {
-    Agua, Comida, Municao, Remedios, Partes_Mecanicas
-}
-
 public class Recursos {
 
     private Nome nome;

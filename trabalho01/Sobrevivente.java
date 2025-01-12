@@ -2,24 +2,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-enum Habilidade {
-    Engenharia,
-    Medicina,
-    Combate,
-    Exploracao,
-    Culinaria,
-    Diplomacia,
-    Hackamento,
-    Furtividade
-}
-
-enum Status {
-    Ativo,
-    Doente,
-    Ferido,
-    Morto
-}
-
 public class Sobrevivente extends Pessoa {
 
     private List<Habilidade> habilidades;
