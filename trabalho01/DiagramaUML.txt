@@ -1,0 +1,119 @@
+@startuml
+    class Vault {
+        -recursos: List<Recursos>
+        -sobreviventes: List<Sobrevivente>
+        -missoes: List<Missao>
+        +Vault()
+        +getRecursos(): List<Recursos>
+        +getSobreviventes(): List<Sobrevivente>
+        +adicionarSobrevivente(sobrevivente: Sobrevivente): void
+        +removerSobrevivente(nome: String): void
+        +buscarSobrevivente(nome: String): Sobrevivente
+        +imprimirNomeSobreviventes(): void
+        +adicionarRecurso(nome: Nome, quantidade: int): void
+        +removerRecurso(nome: Nome, quantidade: int): void
+        +imprimirRecursos(): void
+        +adicionarMissao(missao: Missao): void
+        +removerMissao(missao: Missao): void
+        +getMissoes(): List<Missao>
+        +imprimirMissoes(): void
+        +verificarRecursosSuficientes(nome: Nome, quantidade: int): boolean
+        +atualizarStatusSobrevivente(nome: String, novoStatus: Status): void
+    }
+
+    class Recursos {
+        -nome: Nome
+        -quantidade: int
+        +Recursos(nome: Nome, quantidade: int)
+        +getNome(): Nome
+        +getQuantidade(): int
+        +setQuantidade(quantidade: int): void
+    }
+
+    class Sobrevivente {
+        -nome: String
+        -idade: int
+        -status: Status
+        -habilidades: List<Habilidade>
+        +Sobrevivente(nome: String, idade: int, status: Status)
+        +getNome(): String
+        +getIdade(): int
+        +getStatus(): Status
+        +setStatus(status: Status): void
+        +getHabilidades(): List<Habilidade>
+        +adicionarHabilidade(habilidade: Habilidade): void
+    }
+
+    class Missao {
+        -nome: String
+        -objetivo: String
+        -local: String
+        -sobreviventes: List<Sobrevivente>
+        -recursos: List<Recursos>
+        -status: Status_Missao
+        +Missao(nome: String, objetivo: String, local: String)
+        +getNome(): String
+        +getObjetivo(): String
+        +getLocal(): String
+        +getSobreviventes(): List<Sobrevivente>
+        +getRecursos(): List<Recursos>
+        +getStatus(): Status_Missao
+        +adicionarSobrevivente(sobrevivente: Sobrevivente): void
+        +removerSobrevivente(sobrevivente: Sobrevivente): void
+        +adicionarRecurso(recurso: Recursos): void
+        +removerRecurso(recurso: Recursos): void
+        +atualizarStatus(status: Status_Missao): void
+    }
+
+    enum Status_Missao {
+        Em_Andamento
+        Sucesso
+        Fracasso
+    }
+    enum Nome {
+        Agua
+        Comida
+        Municao
+        Partes_Mecanicas
+        Remedios
+    }
+
+    enum Status {
+        Ativo
+    Doente
+    Ferido
+    Morto
+    }
+
+    enum Habilidade {
+       Engenharia
+    Medicina
+    Combate
+    Exploracao
+    Culinaria
+    Diplomacia
+    Hackamento
+    Furtividade
+    }
+
+class Pessoa {
+        -nome: String
+        -idade: int
+        -ID: String
+        +Pessoa(nome: String, idade: int)
+        +getNome(): String
+        +getIdade(): int
+        +getID(): String
+        +setNome(nome: String): void
+        +setIdade(idade: int): void
+    }
+    Missao "1" *-- "*" Sobrevivente
+    Missao "1" *-- "*" Recursos
+    Missao -- Status_Missao
+    Vault "1" *-- "*" Recursos
+    Vault "1" *-- "*" Sobrevivente
+    Vault "1" *-- "*" Missao
+    Recursos -- Nome
+    Sobrevivente -- Status
+    Sobrevivente "*" -- "*" Habilidade
+Pessoa <|-- Sobrevivente
