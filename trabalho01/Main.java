@@ -160,7 +160,9 @@ public class Main {
                             quantidade = scan.nextInt();
                             if (quantidade > 0) {
                                 break;
-                            }
+                            } else
+                                System.out.println("Digite um valor inteiro positivo ou não nulo");
+                            continue;
                         } catch (Exception e) {
                             System.err.println("Digite um valor valido");
                             scan.nextLine();
