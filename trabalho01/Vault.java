@@ -165,7 +165,7 @@ public class Vault {
         Sobrevivente sobrevivente = procurarSobrevivente(ID);
         Missao missao = procurarMissao(nomeMissao);
         if (missao != null && sobrevivente != null && missao.getSobreviventes().size() < 5) {
-            missao.adicionarSobrevivente(sobrevivente);
+            missao.adicionarIDSobrevivente(sobrevivente.getID());
             System.err.println("Sobrevivente adicionado com sucesso");
         } else {
             System.err.println("Sobrevivente ou missao não encontrada ou missao com maximo de sobreviventes");
@@ -205,8 +205,8 @@ public class Vault {
     public boolean verificadorDeSobreviventeRepetido(String ID, String nomemissao) {
         Missao missao = procurarMissao(nomemissao);
         if (missao != null) {
-            for (Sobrevivente sobrevivente : missao.getSobreviventes()) {
-                if (sobrevivente.getID().equals(ID)) {
+            for (String IDs : missao.getSobreviventes()) {
+                if (IDs.equals(ID)) {
                     return true;
                 }
             }
@@ -278,7 +278,16 @@ public class Vault {
             }
 
         }
+        scan.close();
         return;
+    }
+
+    public void imprimirSobreviventesDaMissao(Missao missao) {
+        for (String ID : missao.getSobreviventes()) {
+            Sobrevivente sobrevivente = procurarSobrevivente(ID);
+            System.out.println(sobrevivente);
+        }
+
     }
 
 }

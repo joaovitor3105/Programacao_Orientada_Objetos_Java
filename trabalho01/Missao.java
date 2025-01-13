@@ -1,14 +1,13 @@
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Missao {
 
     private String nome;
     private String objetivo;
     private String local;
-    private List<Sobrevivente> sobreviventes;
+    private List<String> sobreviventesID;
     private List<Recursos> recursos;
     private Status_Missao status_missao;
 
@@ -16,7 +15,7 @@ public class Missao {
         this.nome = nome;
         this.objetivo = objetivo;
         this.local = local;
-        this.sobreviventes = new ArrayList<Sobrevivente>();
+        this.sobreviventesID = new ArrayList<String>();
         this.recursos = new ArrayList<Recursos>();
         this.recursos.add(new Recursos(Nome.Agua, 0));
         this.recursos.add(new Recursos(Nome.Comida, 0));
@@ -39,8 +38,8 @@ public class Missao {
         return local;
     }
 
-    public List<Sobrevivente> getSobreviventes() {
-        return sobreviventes;
+    public List<String> getSobreviventes() {
+        return sobreviventesID;
     }
 
     public List<Recursos> getRecursos() {
@@ -53,22 +52,17 @@ public class Missao {
 
     @Override
     public String toString() {
-        return "\nNome: " + nome + "\nObjetivo: " + objetivo + "\nLocal: " + local + "\nSobreviventes: " + sobreviventes
+        return "\nNome: " + nome + "\nObjetivo: " + objetivo + "\nLocal: " + local + "\nSobreviventes: "
+                + sobreviventesID
                 + "\nRecursos: " + recursos + "\nStatus: " + status_missao;
     }
 
-    public void adicionarSobrevivente(Sobrevivente sobrevivente) {
-        sobreviventes.add(sobrevivente);
+    public void adicionarIDSobrevivente(String ID) {
+        sobreviventesID.add(ID);
     }
 
     public void adicionarRecurso(Recursos recurso) {
         recursos.add(recurso);
-    }
-
-    public void imprimirSobreviventes() {
-        for (Sobrevivente sobrevivente : sobreviventes) {
-            System.out.println(sobrevivente);
-        }
     }
 
     public void imprimirRecursos() {
@@ -89,14 +83,6 @@ public class Missao {
         this.local = local;
     }
 
-    public void setSobreviventes(List<Sobrevivente> sobreviventes) {
-        this.sobreviventes = sobreviventes;
-    }
-
-    public void setRecursos(List<Recursos> recursos) {
-        this.recursos = recursos;
-    }
-
     public void setStatus_missao(Status_Missao status_missao) {
         this.status_missao = status_missao;
     }
@@ -112,7 +98,8 @@ public class Missao {
     }
 
     public String imprimirSemRecursos() {
-        return "\nNome: " + nome + "\nObjetivo: " + objetivo + "\nLocal: " + local + "\nSobreviventes: " + sobreviventes
+        return "\nNome: " + nome + "\nObjetivo: " + objetivo + "\nLocal: " + local + "\nSobreviventes: "
+                + sobreviventesID
                 + "\nStatus: " + status_missao;
 
     }

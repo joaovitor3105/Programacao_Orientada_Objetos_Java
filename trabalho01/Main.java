@@ -246,7 +246,6 @@ public class Main {
                 }
 
                 case 7: {
-                    // falta os recursos da missao
                     if (vault.getMissoes().size() != 0 && vault.getSobreviventes().size() != 0) {
                         vault.imprimirNomeMissoes();
                         System.out.println("Digite o nome da missao para adicionar sobreviventes: ");
@@ -308,7 +307,7 @@ public class Main {
                         String nomeMissao = scan.nextLine();
                         Missao missao = vault.procurarMissao(nomeMissao);
                         if (missao != null) {
-                            missao.imprimirSobreviventes();
+                            vault.imprimirSobreviventesDaMissao(missao);
                         } else {
                             System.err.println("Missao não encontrada");
                         }
