@@ -26,4 +26,8 @@ public class Recursos {
         return "\nNome: " + nome + "\nQuantidade: " + quantidade;
     }
 
+    public void setNome(Nome nome) {
+        this.nome = nome;
+    }
+
 }

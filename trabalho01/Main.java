@@ -10,7 +10,7 @@ public class Main {
         int op;
         while (true) {
             System.out.println("----------------------------------------------------------------");
-            System.out.println("     MENU do Vault");
+            System.out.println("                   MENU do Vault");
             System.out.println("1-Adicionar Sobrevivente");
             System.out.println("2-Adicionar Habilidade a um sobrevivente");
             System.out.println("3-Remover Habilidade de um sobrevivente");
@@ -76,26 +76,34 @@ public class Main {
 
                         System.out.println("Digite o ID do sobrevivente que deseja adicionar a habilidade: ");
                         String IDadicionar = scan.nextLine();
-                        System.out.println("Digite a habilidade a adicionar : ");
-                        System.out.println("Habilidades disponiveis: ");
-                        for (Habilidade habilidade : Habilidade.values()) {
-                            System.out.println(habilidade);
-                        }
-                        Habilidade habilidade;
-                        while (true) {
-
-                            try {
-                                habilidade = Habilidade.valueOf(scan.nextLine());
-                                break;
-                            } catch (IllegalArgumentException e) {
-                                System.err.println("Digite uma habilidade valida");
+                        if (vault.verificadordeID(IDadicionar) && !vault.verificadorDeMorto(IDadicionar)) {
+                            System.out.println("Digite a habilidade a adicionar : ");
+                            System.out.println("Habilidades disponiveis: ");
+                            for (Habilidade habilidade : Habilidade.values()) {
+                                System.out.println(habilidade);
                             }
+                            Habilidade habilidade;
+                            while (true) {
 
-                        }
-                        vault.adicionarHabilidade(IDadicionar, habilidade);
-                    } else {
-                        System.err.println("Nao existem sobreviventes cadastrados");
-                    }
+                                try {
+                                    habilidade = Habilidade.valueOf(scan.nextLine());
+                                    break;
+                                } catch (IllegalArgumentException e) {
+                                    System.err.println("Digite uma habilidade valida");
+                                }
+
+                            }
+                            if (!vault.verificarHabilidadeRepetida(IDadicionar, habilidade)) {
+
+                                vault.adicionarHabilidade(IDadicionar, habilidade);
+                            } else {
+                                System.err.println("Sobrevivente ja possui essa habilidade");
+                            }
+                        } else
+                            System.err.println("ID inválido ou sobrevivente morto");
+
+                    } else
+                        System.err.println("Não há sobreviventes cadastrados");
                     break;
                 }
 
@@ -106,13 +114,22 @@ public class Main {
                         vault.imprimirSobreviventes();
                         System.out.println("Digite o ID do sobrevivente para remover a habilidade: ");
                         String IDremoverhabilidade = scan.nextLine();
-                        vault.removerHabilidade(IDremoverhabilidade);
-                        break;
+                        if (vault.verificadordeID(IDremoverhabilidade)
+                                && vault.verificadorDeMorto(IDremoverhabilidade)) {
+                            Sobrevivente sobrevivente = vault.procurarSobrevivente(IDremoverhabilidade);
+                            if (!sobrevivente.getHabilidades().isEmpty()) {
+                                vault.removerHabilidade(IDremoverhabilidade);
+                                break;
+                            } else
+                                System.err.println("Sobrevivente não possui habilidades");
+                        } else {
+                            System.err.println("ID invalido ou sobrevivente morto");
+                        }
 
                     } else {
-                        System.err.println("Nao ha sobreviventes cadastrados");
-                        break;
+                        System.err.println("Não há sobreviventes cadastrados");
                     }
+                    break;
                 }
 
                 case 4: {
@@ -198,7 +215,7 @@ public class Main {
                     String objetivo = scan.nextLine();
                     System.out.println("Digite o local da missao: ");
                     String local = scan.nextLine();
-                    for (Status status : Status.values()) {
+                    for (Status_Missao status : Status_Missao.values()) {
                         System.out.println(status);
                     }
                     Status_Missao status_missao;
@@ -214,32 +231,57 @@ public class Main {
                         break;
                     }
                     vault.adicionarMissao(new Missao(nome, objetivo, local, status_missao));
+                    System.out.println("Missao registrada com sucesso");
+                    if (vault.procurarMissao(nome).getStatus().equals(Status_Missao.Sucesso)) {
+                        System.out.println("Esta missão teve recursos obtidos? (S/N)");
+                        String x;
+                        x = scan.nextLine();
+                        if (x.equals("S")) {
+                            vault.adicionarRecursoMissao(nome);
+
+                        }
+
+                    }
                     break;
                 }
 
                 case 7: {
+                    // falta os recursos da missao
                     if (vault.getMissoes().size() != 0 && vault.getSobreviventes().size() != 0) {
-                        vault.imprimirMissoes();
+                        vault.imprimirNomeMissoes();
                         System.out.println("Digite o nome da missao para adicionar sobreviventes: ");
                         String nomeMissao = scan.nextLine();
-                        vault.imprimirSobreviventes();
-                        System.out.println("Digite o ID do sobrevivente a ser adicionado a missao: ");
-                        String IDsobrevivente = scan.nextLine();
-                        vault.adicionarSobreviventeMissao(IDsobrevivente, nomeMissao);
+                        if (vault.verificadordemissaopornome(nomeMissao)) {
+                            vault.imprimirSobreviventes();
+                            System.out.println("Digite o ID do sobrevivente a ser adicionado a missao: ");
+                            String IDsobrevivente = scan.nextLine();
+                            if (vault.verificadordeID(IDsobrevivente)
+                                    && !vault.verificadorDeSobreviventeRepetido(IDsobrevivente, nomeMissao)
+                                    && !vault.verificadorDeMorto(IDsobrevivente)
+                                    && !vault.verificadorDeDoente(IDsobrevivente)) {
+
+                                vault.adicionarSobreviventeMissao(IDsobrevivente, nomeMissao);
+                            } else {
+                                System.err.println("Sobrevivente ja cadastrado na missão ou ID invalido");
+                            }
+                        } else {
+                            System.err.println("Missao nao encontrada");
+                        }
                     } else {
                         System.err.println("Não há missoes ou sobreviventes cadastrados");
                     }
+                    break;
 
                 }
 
                 case 8: {
                     if (vault.getSobreviventes().size() != 0) {
                         vault.imprimirSobreviventes();
-                        break;
                     } else {
                         System.err.println("Nao ha sobreviventes cadastrados");
-                        break;
+
                     }
+                    break;
 
                 }
 
@@ -254,7 +296,7 @@ public class Main {
                         vault.imprimirMissoes();
                         break;
                     } else {
-                        System.err.println("Nao ha missoes cadastradas");
+                        System.err.println("Não há missoẽs cadastradas");
                         break;
                     }
                 }

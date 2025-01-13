@@ -16,8 +16,8 @@ public class Pessoa {
     public String gerarIDMenor() {
         ID = UUID.randomUUID().toString();
         return ID.substring(0, 4);
-        // reduzindo o tamanho do ID porém em caso de adicionar mais de 100 pessoas
-        // recomendado aumentar o tamanho para 8;
+        // reduzindo o tamanho do ID ,porém em caso de adicionar mais de 100 pessoas
+        // recomendado aumentar o tamanho;
     }
 
     public String getNome() {

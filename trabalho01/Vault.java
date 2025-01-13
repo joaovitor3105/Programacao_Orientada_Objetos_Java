@@ -128,10 +128,10 @@ public class Vault {
                 recurso.setQuantidade(recurso.getQuantidade() - quantidade);
                 System.err.println("Recursos consumidos com sucesso");
                 return;
-            } else {
-                System.err.println("Quantidade insuficiente de recursos");
             }
+
         }
+        System.err.println("Quantidade insuficiente de recursos");
 
     }
 
@@ -143,8 +143,16 @@ public class Vault {
 
     public void imprimirMissoes() {
         for (Missao missao : missoes) {
-            System.out.println(missao);
+            if (missao.getStatus().equals(Status_Missao.Sucesso)) {
+                System.out.println(missao);
+            }
+
+            else {
+                System.out.println(missao.imprimirSemRecursos());
+
+            }
         }
+        return;
     }
 
     public void imprimirNomeMissoes() {
@@ -172,4 +180,105 @@ public class Vault {
         }
 
     }
+
+    public boolean verificarHabilidadeRepetida(String ID, Habilidade habilidade) {
+        Sobrevivente sobrevivente = procurarSobrevivente(ID);
+        if (sobrevivente != null) {
+            for (Habilidade habilidadeSobrevivente : sobrevivente.getHabilidades()) {
+                if (habilidadeSobrevivente == habilidade) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean verificadordeID(String ID) {
+        for (Sobrevivente sobrevivente : sobreviventes) {
+            if (sobrevivente.getID().equals(ID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificadorDeSobreviventeRepetido(String ID, String nomemissao) {
+        Missao missao = procurarMissao(nomemissao);
+        if (missao != null) {
+            for (Sobrevivente sobrevivente : missao.getSobreviventes()) {
+                if (sobrevivente.getID().equals(ID)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean verificadordemissaopornome(String nome) {
+        for (Missao missao : missoes) {
+            if (missao.getNome().equals(nome)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificadorDeMorto(String ID) {
+        procurarSobrevivente(ID);
+        if (procurarSobrevivente(ID).getStatus() == Status.Morto) {
+            return true;
+        } else
+            return false;
+    }
+
+    public boolean verificadorDeDoente(String ID) {
+        procurarSobrevivente(ID);
+        if (procurarSobrevivente(ID).getStatus() == Status.Doente) {
+            return true;
+        } else
+            return false;
+    }
+
+    public void adicionarRecursoMissao(String nome_missao) {
+        Missao missao = procurarMissao(nome_missao);
+        Scanner scan = new Scanner(System.in);
+        Nome nome_recurso;
+        int quantidade;
+        String op;
+
+        while (true)
+
+        {
+            for (Nome recurso : Nome.values()) {
+                System.out.println(recurso);
+
+            }
+            System.out.println("Digite o recurso encontrado:");
+
+            try {
+                nome_recurso = Nome.valueOf(scan.nextLine());
+
+            } catch (IllegalArgumentException e) {
+                System.err.println("Digite um recurso válido");
+                continue;
+            }
+            System.out.println("Digite a quantidade do recurso:");
+            quantidade = scan.nextInt();
+            scan.nextLine();
+            missao.adicionarRecurso(nome_recurso, quantidade);
+            adicionarRecurso(nome_recurso, quantidade);
+            System.out.println("Recurso adicionado com sucesso");
+            System.out.println("Tem mais algum recurso?(S/N)");
+            op = scan.nextLine();
+            if (op.equals("N")) {
+                break;
+
+            } else if (op.equals("S")) {
+                continue;
+            }
+
+        }
+        return;
+    }
+
 }
