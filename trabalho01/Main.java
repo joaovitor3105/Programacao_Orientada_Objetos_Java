@@ -232,8 +232,10 @@ public class Main {
                         }
                         break;
                     }
+
                     vault.adicionarMissao(new Missao(nome, objetivo, local, status_missao));
                     System.out.println("Missao registrada com sucesso");
+
                     if (vault.procurarMissao(nome).getStatus().equals(Status_Missao.Sucesso)) {
                         System.out.println("Esta missão teve recursos obtidos? (S/N)");
                         String x;

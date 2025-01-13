@@ -19,6 +19,15 @@
         +imprimirMissoes(): void
         +verificarRecursosSuficientes(nome: Nome, quantidade: int): boolean
         +atualizarStatusSobrevivente(nome: String, novoStatus: Status): void
+        +verificadordeID(id: String): boolean
+        +verificadorDeMorto(id: String): boolean
+        +procurarSobrevivente(id: String): Sobrevivente
+        +verificarHabilidadeRepetida(id: String, habilidade: Habilidade): boolean
+        +adicionarHabilidade(id: String, habilidade: Habilidade): void
+        +removerHabilidade(id: String): void
+        +adicionarRecursoMissao(nome: String): void
+        +procurarMissao(nome: String): Missao
+        +imprimirNomeMissoes(): void
     }
 
     class Recursos {
@@ -51,7 +60,7 @@
         -sobreviventes: List<Sobrevivente>
         -recursos: List<Recursos>
         -status: Status_Missao
-        +Missao(nome: String, objetivo: String, local: String)
+        +Missao(nome: String, objetivo: String, local: String, status: Status_Missao)
         +getNome(): String
         +getObjetivo(): String
         +getLocal(): String
@@ -70,6 +79,7 @@
         Sucesso
         Fracasso
     }
+
     enum Nome {
         Agua
         Comida
@@ -80,27 +90,27 @@
 
     enum Status {
         Ativo
-    Doente
-    Ferido
-    Morto
+        Doente
+        Ferido
+        Morto
     }
 
     enum Habilidade {
-       Engenharia
-    Medicina
-    Combate
-    Exploracao
-    Culinaria
-    Diplomacia
-    Hackamento
-    Furtividade
+        Engenharia
+        Medicina
+        Combate
+        Exploracao
+        Culinaria
+        Diplomacia
+        Hackamento
+        Furtividade
     }
 
-class Pessoa {
+    class Pessoa {
         -nome: String
         -idade: int
         -ID: String
-        +gerarIDMenor():String
+        +gerarIDMenor(): String
         +Pessoa(nome: String, idade: int)
         +getNome(): String
         +getIdade(): int
@@ -108,6 +118,7 @@ class Pessoa {
         +setNome(nome: String): void
         +setIdade(idade: int): void
     }
+
     Missao "1" *-- "*" Sobrevivente
     Missao "1" *-- "*" Recursos
     Missao -- Status_Missao
@@ -117,4 +128,5 @@ class Pessoa {
     Recursos -- Nome
     Sobrevivente -- Status
     Sobrevivente "*" -- "*" Habilidade
-Pessoa <|-- Sobrevivente
+    Pessoa <|-- Sobrevivente
+@enduml
