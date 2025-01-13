@@ -2,10 +2,11 @@
 import java.util.Scanner;
 
 public class Main {
+    public static final String YELLOW = "\u001B[33m";
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Bem-vindo ao  Vault ");
+        System.out.println(YELLOW + "Bem-vindo ao  Vault ");
         Vault vault = new Vault();
         int op;
         while (true) {
@@ -24,6 +25,7 @@ public class Main {
             System.out.println("11-Exibir Sobreviventes cadastrados em uma Missao");
             System.out.println("12-Sair");
             System.out.println("----------------------------------------------------------------");
+            System.out.print("Opção:");
             op = scan.nextInt();
             scan.nextLine();
             switch (op) {
