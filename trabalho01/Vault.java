@@ -8,6 +8,7 @@ public class Vault {
     private List<Recursos> recursos;
     private List<Sobrevivente> sobreviventes;
     private List<Missao> missoes;
+    Scanner Scan = new Scanner(System.in);
 
     public Vault() {
         this.recursos = new ArrayList<Recursos>();
@@ -79,7 +80,6 @@ public class Vault {
     }
 
     public void removerHabilidade(String ID) {
-        Scanner Scan = new Scanner(System.in);
         Sobrevivente sobrevivente = procurarSobrevivente(ID);
         if (sobrevivente != null) {
             sobrevivente.imprimirHabilidades();
@@ -102,7 +102,6 @@ public class Vault {
         } else {
             System.err.println("Sobrevivente nao encontrado");
         }
-        Scan.close();
 
     }
 
@@ -241,7 +240,6 @@ public class Vault {
 
     public void adicionarRecursoMissao(String nome_missao) {
         Missao missao = procurarMissao(nome_missao);
-        Scanner scan = new Scanner(System.in);
         Nome nome_recurso;
         int quantidade;
         String op;
@@ -256,7 +254,7 @@ public class Vault {
             System.out.println("Digite o recurso encontrado:");
 
             try {
-                nome_recurso = Nome.valueOf(scan.nextLine());
+                nome_recurso = Nome.valueOf(Scan.nextLine());
 
             } catch (IllegalArgumentException e) {
                 System.err.println("Digite um recurso válido");
@@ -266,7 +264,7 @@ public class Vault {
 
             while (true) {
                 try {
-                    quantidade = scan.nextInt();
+                    quantidade = Scan.nextInt();
                     if (quantidade > 0) {
                         break;
                     } else
@@ -274,16 +272,16 @@ public class Vault {
                     continue;
                 } catch (Exception e) {
                     System.err.println("Digite um valor valido");
-                    scan.nextLine();
+                    Scan.nextLine();
                 }
             }
-            scan.nextLine();
+            Scan.nextLine();
 
             missao.adicionarRecurso(nome_recurso, quantidade);
             adicionarRecurso(nome_recurso, quantidade);
 
             System.out.println("Tem mais algum recurso?(S/N)");
-            op = scan.nextLine();
+            op = Scan.nextLine();
             if (op.equals("S")) {
                 continue;
             } else {
@@ -301,6 +299,12 @@ public class Vault {
             System.out.println(sobrevivente);
         }
 
+    }
+
+    public void imprimirNomeeIDs() {
+        for (Sobrevivente sobrevivente : sobreviventes) {
+            System.out.println(sobrevivente.imprimirNomeeID());
+        }
     }
 
 }

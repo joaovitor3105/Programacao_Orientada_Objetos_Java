@@ -23,6 +23,7 @@
         +setStatus(status: Status): void
         +getHabilidades(): List<Habilidade>
         +adicionarHabilidade(habilidade: Habilidade): void
+        +imprimirNomeeID() : String
     }
 
     class Recurso {
@@ -84,6 +85,8 @@
         +adicionarRecursoMissao(nome: String): void
         +procurarMissao(nome: String): Missao
         +imprimirNomeMissoes(): void
+        +void imprimirNomeeIDs() : String
+        
     }
     
     enum Status_Missao {

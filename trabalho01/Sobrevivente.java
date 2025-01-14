@@ -21,6 +21,10 @@ public class Sobrevivente extends Pessoa {
         return status;
     }
 
+    public String imprimirNomeeID() {
+        return "Nome:" + getNome() + "\tID:" + getID();
+    }
+
     @Override
     public String toString() {
         return super.toString() + "\nHabilidades: " + habilidades + "\nStatus: " + status;

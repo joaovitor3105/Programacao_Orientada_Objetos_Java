@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println(YELLOW + "Bem-vindo ao  Vault ");
+        System.out.println(YELLOW + "Bem-vindo ao  Vault-101 ");
         Vault vault = new Vault();
         int op;
         while (true) {
@@ -74,7 +74,7 @@ public class Main {
                 case 2: {
                     if (vault.getSobreviventes().size() != 0) {
                         System.out.println("Sobreviventes disponiveis: ");
-                        vault.imprimirSobreviventes();
+                        vault.imprimirNomeeIDs();
 
                         System.out.println("Digite o ID do sobrevivente que deseja adicionar a habilidade: ");
                         String IDadicionar = scan.nextLine();
@@ -113,11 +113,11 @@ public class Main {
 
                     if (vault.getSobreviventes().size() != 0) {
                         System.out.println("Sobreviventes disponiveis: ");
-                        vault.imprimirSobreviventes();
+                        vault.imprimirNomeeIDs();
                         System.out.println("Digite o ID do sobrevivente para remover a habilidade: ");
                         String IDremoverhabilidade = scan.nextLine();
                         if (vault.verificadordeID(IDremoverhabilidade)
-                                && vault.verificadorDeMorto(IDremoverhabilidade)) {
+                                && !vault.verificadorDeMorto(IDremoverhabilidade)) {
                             Sobrevivente sobrevivente = vault.procurarSobrevivente(IDremoverhabilidade);
                             if (!sobrevivente.getHabilidades().isEmpty()) {
                                 vault.removerHabilidade(IDremoverhabilidade);
@@ -257,7 +257,7 @@ public class Main {
                         System.out.println("Digite o nome da missao para adicionar sobreviventes: ");
                         String nomeMissao = scan.nextLine();
                         if (vault.verificadordemissaopornome(nomeMissao)) {
-                            vault.imprimirSobreviventes();
+                            vault.imprimirNomeeIDs();
                             System.out.println("Digite o ID do sobrevivente a ser adicionado a missao: ");
                             String IDsobrevivente = scan.nextLine();
                             if (vault.verificadordeID(IDsobrevivente)
