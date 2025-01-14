@@ -116,7 +116,7 @@ public class Vault {
         for (Recursos recurso : recursos) {
             if (recurso.getNome() == nome) {
                 recurso.setQuantidade(recurso.getQuantidade() + quantidade);
-                System.err.println("Recursos adicionados com sucesso");
+                System.err.println("Recursos adicionados com sucesso no vault");
             }
         }
 
@@ -263,23 +263,36 @@ public class Vault {
                 continue;
             }
             System.out.println("Digite a quantidade do recurso:");
-            quantidade = scan.nextInt();
+
+            while (true) {
+                try {
+                    quantidade = scan.nextInt();
+                    if (quantidade > 0) {
+                        break;
+                    } else
+                        System.out.println("Digite um valor inteiro positivo ou não nulo");
+                    continue;
+                } catch (Exception e) {
+                    System.err.println("Digite um valor valido");
+                    scan.nextLine();
+                }
+            }
             scan.nextLine();
+
             missao.adicionarRecurso(nome_recurso, quantidade);
             adicionarRecurso(nome_recurso, quantidade);
-            System.out.println("Recurso adicionado com sucesso");
+
             System.out.println("Tem mais algum recurso?(S/N)");
             op = scan.nextLine();
-            if (op.equals("N")) {
-                break;
-
-            } else if (op.equals("S")) {
+            if (op.equals("S")) {
                 continue;
+            } else {
+                break;
             }
-
         }
-        scan.close();
+
         return;
+
     }
 
     public void imprimirSobreviventesDaMissao(Missao missao) {

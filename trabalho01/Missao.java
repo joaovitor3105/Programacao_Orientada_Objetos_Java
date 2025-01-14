@@ -91,7 +91,7 @@ public class Missao {
         for (Recursos recurso : recursos) {
             if (recurso.getNome() == nome) {
                 recurso.setQuantidade(recurso.getQuantidade() + quantidade);
-                System.err.println("Recursos adicionados com sucesso");
+                System.err.println("Recursos adicionados com sucesso na missão");
             }
         }
 
