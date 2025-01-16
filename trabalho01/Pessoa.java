@@ -6,6 +6,10 @@ public class Pessoa {
     private String nome;
     private int idade;
     private String ID;
+    public static final String WHITE = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
 
     public Pessoa(String nome, int idade) {
         this.nome = nome;
@@ -42,6 +46,6 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "\nNome: " + nome + "\nIdade: " + idade + "\nID: " + ID;
+        return YELLOW + "\nNome: " + nome + "\nIdade: " + idade + "\nID: " + ID + WHITE;
     }
 }

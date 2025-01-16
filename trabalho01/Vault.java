@@ -1,4 +1,3 @@
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,6 +8,11 @@ public class Vault {
     private List<Sobrevivente> sobreviventes;
     private List<Missao> missoes;
     Scanner Scan = new Scanner(System.in);
+
+    public static final String WHITE = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
 
     public Vault() {
         this.recursos = new ArrayList<Recursos>();
@@ -63,18 +67,18 @@ public class Vault {
         Sobrevivente sobrevivente = procurarSobrevivente(ID);
 
         if (sobrevivente == null) {
-            System.err.println("Sobrevivente não encontrado");
+            System.err.println(RED + "Sobrevivente não encontrado" + WHITE);
             return;
         }
 
         if (sobrevivente.getHabilidades().size() == 3) {
-            System.err.println("Sobrevivente ja possui 3 habilidades");
+            System.err.println(RED + "Sobrevivente ja possui 3 habilidades" + WHITE);
             return;
         }
 
         else {
             sobrevivente.adicionarHabilidade(habilidade);
-            System.err.println("Habilidade adicionada com sucesso");
+            System.err.println(GREEN + "Habilidade adicionada com sucesso" + WHITE);
             return;
         }
     }
@@ -86,28 +90,28 @@ public class Vault {
             System.err.println("Digite a habilidade a remover: ");
             Habilidade habilidade;
             while (true) {
-
                 try {
                     habilidade = Habilidade.valueOf(Scan.nextLine());
-
                 } catch (IllegalArgumentException e) {
-                    System.err.println("Digite uma habilidade valida");
+                    System.err.println(RED + "Digite uma habilidade valida" + WHITE);
                     continue;
                 }
                 break;
             }
+            if (!sobrevivente.getHabilidades().contains(habilidade)) {
+                System.err.println(RED + "Habilidade não encontrada no sobrevivente" + WHITE);
+                return;
+            }
             sobrevivente.getHabilidades().remove(habilidade);
-            System.err.println("Habilidade removida com sucesso");
-
+            System.err.println(GREEN + "Habilidade removida com sucesso" + WHITE);
         } else {
-            System.err.println("Sobrevivente nao encontrado");
+            System.err.println(RED + "Sobrevivente nao encontrado" + WHITE);
         }
-
     }
 
     public void imprimirNomeSobreviventes() {
         for (Sobrevivente sobrevivente : sobreviventes) {
-            System.out.println(sobrevivente.getNome());
+            System.out.println(YELLOW + sobrevivente.getNome() + WHITE);
         }
     }
 
@@ -115,7 +119,7 @@ public class Vault {
         for (Recursos recurso : recursos) {
             if (recurso.getNome() == nome) {
                 recurso.setQuantidade(recurso.getQuantidade() + quantidade);
-                System.err.println("Recursos adicionados com sucesso no vault");
+                System.err.println(GREEN + "Recursos adicionados com sucesso no vault" + WHITE);
             }
         }
 
@@ -125,29 +129,29 @@ public class Vault {
         for (Recursos recurso : recursos) {
             if (recurso.getNome() == nome && recurso.getQuantidade() >= quantidade) {
                 recurso.setQuantidade(recurso.getQuantidade() - quantidade);
-                System.err.println("Recursos consumidos com sucesso");
+                System.err.println(GREEN + "Recursos consumidos com sucesso" + WHITE);
                 return;
             }
 
         }
-        System.err.println("Quantidade insuficiente de recursos");
+        System.err.println(RED + "Quantidade insuficiente de recursos" + WHITE);
 
     }
 
     public void imprimirRecursos() {
         for (Recursos recurso : recursos) {
-            System.out.println(recurso);
+            System.out.println(YELLOW + recurso + WHITE);
         }
     }
 
     public void imprimirMissoes() {
         for (Missao missao : missoes) {
             if (missao.getStatus().equals(Status_Missao.Sucesso)) {
-                System.out.println(missao);
+                System.out.println(YELLOW + missao + WHITE);
             }
 
             else {
-                System.out.println(missao.imprimirSemRecursos());
+                System.out.println(YELLOW + missao.imprimirSemRecursos() + WHITE);
 
             }
         }
@@ -155,8 +159,9 @@ public class Vault {
     }
 
     public void imprimirNomeMissoes() {
+        System.out.println("Missoes: ");
         for (Missao missao : missoes) {
-            System.out.println(missao.getNome());
+            System.out.println(YELLOW + missao.getNome() + WHITE);
         }
     }
 
@@ -165,9 +170,10 @@ public class Vault {
         Missao missao = procurarMissao(nomeMissao);
         if (missao != null && sobrevivente != null && missao.getSobreviventes().size() < 5) {
             missao.adicionarIDSobrevivente(sobrevivente.getID());
-            System.err.println("Sobrevivente adicionado com sucesso");
+            System.err.println(GREEN + "Sobrevivente adicionado com sucesso" + WHITE);
         } else {
-            System.err.println("Sobrevivente ou missao não encontrada ou missao com maximo de sobreviventes");
+            System.err.println(
+                    RED + "Sobrevivente ou missao não encontrada ou missao com maximo de sobreviventes" + WHITE);
 
         }
 
@@ -175,7 +181,7 @@ public class Vault {
 
     public void imprimirSobreviventes() {
         for (Sobrevivente sobrevivente : sobreviventes) {
-            System.out.println(sobrevivente);
+            System.out.println(YELLOW + sobrevivente + WHITE);
         }
 
     }
@@ -257,7 +263,7 @@ public class Vault {
                 nome_recurso = Nome.valueOf(Scan.nextLine());
 
             } catch (IllegalArgumentException e) {
-                System.err.println("Digite um recurso válido");
+                System.err.println(RED + "Digite um recurso válido" + WHITE);
                 continue;
             }
             System.out.println("Digite a quantidade do recurso:");
@@ -268,10 +274,10 @@ public class Vault {
                     if (quantidade > 0) {
                         break;
                     } else
-                        System.out.println("Digite um valor inteiro positivo ou não nulo");
+                        System.out.println(RED + "Digite um valor inteiro positivo ou não nulo" + WHITE);
                     continue;
                 } catch (Exception e) {
-                    System.err.println("Digite um valor valido");
+                    System.err.println(RED + "Digite um valor valido" + WHITE);
                     Scan.nextLine();
                 }
             }
@@ -296,14 +302,14 @@ public class Vault {
     public void imprimirSobreviventesDaMissao(Missao missao) {
         for (String ID : missao.getSobreviventes()) {
             Sobrevivente sobrevivente = procurarSobrevivente(ID);
-            System.out.println(sobrevivente);
+            System.out.println(YELLOW + sobrevivente + WHITE);
         }
 
     }
 
     public void imprimirNomeeIDs() {
         for (Sobrevivente sobrevivente : sobreviventes) {
-            System.out.println(sobrevivente.imprimirNomeeID());
+            System.out.println(YELLOW + sobrevivente.imprimirNomeeID() + WHITE);
         }
     }
 

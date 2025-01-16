@@ -10,6 +10,10 @@ public class Missao {
     private List<String> sobreviventesID;
     private List<Recursos> recursos;
     private Status_Missao status_missao;
+    public static final String WHITE = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
 
     public Missao(String nome, String objetivo, String local, Status_Missao status_missao) {
         this.nome = nome;
@@ -52,9 +56,9 @@ public class Missao {
 
     @Override
     public String toString() {
-        return "\nNome: " + nome + "\nObjetivo: " + objetivo + "\nLocal: " + local + "\nSobreviventes: "
+        return YELLOW + "\nNome: " + nome + "\nObjetivo: " + objetivo + "\nLocal: " + local + "\nSobreviventes: "
                 + sobreviventesID
-                + "\nRecursos: " + recursos + "\nStatus: " + status_missao;
+                + "\nRecursos: " + recursos + YELLOW + "\nStatus: " + status_missao + WHITE;
     }
 
     public void adicionarIDSobrevivente(String ID) {
@@ -91,16 +95,16 @@ public class Missao {
         for (Recursos recurso : recursos) {
             if (recurso.getNome() == nome) {
                 recurso.setQuantidade(recurso.getQuantidade() + quantidade);
-                System.err.println("Recursos adicionados com sucesso na missão");
+                System.err.println(GREEN + "Recursos adicionados com sucesso na missão" + WHITE);
             }
         }
 
     }
 
     public String imprimirSemRecursos() {
-        return "\nNome: " + nome + "\nObjetivo: " + objetivo + "\nLocal: " + local + "\nSobreviventes: "
+        return YELLOW + "\nNome: " + nome + "\nObjetivo: " + objetivo + "\nLocal: " + local + "\nSobreviventes: "
                 + sobreviventesID
-                + "\nStatus: " + status_missao;
+                + "\nStatus: " + status_missao + WHITE;
 
     }
 }

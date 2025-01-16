@@ -1,12 +1,18 @@
-
 import java.util.Scanner;
 
 public class Main {
+    public static final String RED = "\u001B[31m";
+    public static final String BLUE = "\u001B[96m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String GREEN = "\u001B[32m";
     public static final String YELLOW = "\u001B[33m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println(YELLOW + "Bem-vindo ao  Vault-101 ");
+        System.out.println(WHITE + "Bem-vindo ao Vault-101 ");
         Vault vault = new Vault();
         int op;
         while (true) {
@@ -40,15 +46,16 @@ public class Main {
                             if (idade >= 0) {
                                 break;
                             } else {
-                                System.out.println("Digite um valor valido");
+                                System.out.println(RED + "Digite um valor valido" + WHITE);
                             }
                         } catch (Exception e) {
-                            System.err.println("Digite um valor valido");
+                            System.err.println(RED + "Digite um valor valido" + WHITE);
                             scan.nextLine();
                         }
 
                     }
                     scan.nextLine();
+
                     System.out.println("Digite o status do sobrevivente: ");
                     System.out.println("Status disponiveis: ");
                     for (Status status : Status.values()) {
@@ -61,13 +68,13 @@ public class Main {
                             status = Status.valueOf(scan.nextLine());
 
                         } catch (IllegalArgumentException e) {
-                            System.err.println("Digite um status valido");
+                            System.err.println(RED + "Digite um status valido" + WHITE);
                             continue;
                         }
                         break;
                     }
                     vault.adicionarSobrevivente(new Sobrevivente(nome, idade, status));
-                    System.out.println("Sobrevivente adicionado com sucesso");
+                    System.out.println(GREEN + "Sobrevivente adicionado com sucesso" + WHITE);
                     break;
                 }
 
@@ -91,21 +98,22 @@ public class Main {
                                     habilidade = Habilidade.valueOf(scan.nextLine());
                                     break;
                                 } catch (IllegalArgumentException e) {
-                                    System.err.println("Digite uma habilidade valida");
+                                    System.err.println(RED + "Digite uma habilidade valida" + WHITE);
                                 }
 
                             }
                             if (!vault.verificarHabilidadeRepetida(IDadicionar, habilidade)) {
 
                                 vault.adicionarHabilidade(IDadicionar, habilidade);
+
                             } else {
-                                System.err.println("Sobrevivente ja possui essa habilidade");
+                                System.err.println(RED + "Sobrevivente ja possui essa habilidade" + WHITE);
                             }
                         } else
-                            System.err.println("ID inválido ou sobrevivente morto");
+                            System.err.println(RED + "ID inválido ou sobrevivente morto" + WHITE);
 
                     } else
-                        System.err.println("Não há sobreviventes cadastrados");
+                        System.err.println(RED + "Não há sobreviventes cadastrados" + WHITE);
                     break;
                 }
 
@@ -121,15 +129,16 @@ public class Main {
                             Sobrevivente sobrevivente = vault.procurarSobrevivente(IDremoverhabilidade);
                             if (!sobrevivente.getHabilidades().isEmpty()) {
                                 vault.removerHabilidade(IDremoverhabilidade);
+
                                 break;
                             } else
-                                System.err.println("Sobrevivente não possui habilidades");
+                                System.err.println(RED + "Sobrevivente não possui habilidades" + WHITE);
                         } else {
-                            System.err.println("ID invalido ou sobrevivente morto");
+                            System.err.println(RED + "ID invalido ou sobrevivente morto" + WHITE);
                         }
 
                     } else {
-                        System.err.println("Não há sobreviventes cadastrados");
+                        System.err.println(RED + "Não há sobreviventes cadastrados" + WHITE);
                     }
                     break;
                 }
@@ -147,7 +156,7 @@ public class Main {
                             nome_recurso = Nome.valueOf(scan.nextLine());
 
                         } catch (IllegalArgumentException e) {
-                            System.err.println("Digite um recurso valido");
+                            System.err.println(RED + "Digite um recurso valido" + WHITE);
                             continue;
                         }
                         break;
@@ -161,10 +170,10 @@ public class Main {
                             if (quantidade > 0) {
                                 break;
                             } else
-                                System.out.println("Digite um valor inteiro positivo ou não nulo");
+                                System.out.println(RED + "Digite um valor inteiro positivo ou não nulo" + WHITE);
                             continue;
                         } catch (Exception e) {
-                            System.err.println("Digite um valor valido");
+                            System.err.println(RED + "Digite um valor valido" + WHITE);
                             scan.nextLine();
                         }
                     }
@@ -187,7 +196,7 @@ public class Main {
                             nome_recurso = Nome.valueOf(scan.nextLine());
 
                         } catch (IllegalArgumentException e) {
-                            System.err.println("Digite um recurso valido");
+                            System.err.println(RED + "Digite um recurso valido" + WHITE);
                             continue;
                         }
                         break;
@@ -202,13 +211,14 @@ public class Main {
                                 break;
                             }
                         } catch (Exception e) {
-                            System.err.println("Digite um valor valido");
+                            System.err.println(RED + "Digite um valor valido" + WHITE);
                             scan.nextLine();
                         }
                     }
                     scan.nextLine();
 
                     vault.consumirRecurso(nome_recurso, quantidade);
+
                     break;
                 }
 
@@ -229,14 +239,14 @@ public class Main {
                             status_missao = Status_Missao.valueOf(scan.nextLine());
 
                         } catch (IllegalArgumentException e) {
-                            System.err.println("Digite um status valido");
+                            System.err.println(RED + "Digite um status valido" + WHITE);
                             continue;
                         }
                         break;
                     }
 
                     vault.adicionarMissao(new Missao(nome, objetivo, local, status_missao));
-                    System.out.println("Missao registrada com sucesso");
+                    System.out.println(GREEN + "Missão registrada com sucesso" + WHITE);
 
                     if (vault.procurarMissao(nome).getStatus().equals(Status_Missao.Sucesso)) {
                         System.out.println("Esta missão teve recursos obtidos? (S/N)");
@@ -244,7 +254,7 @@ public class Main {
                         x = scan.nextLine();
                         if (x.equals("S")) {
                             vault.adicionarRecursoMissao(nome);
-
+                            System.out.println(GREEN + "Recursos adicionados com sucesso" + WHITE);
                         }
 
                     }
@@ -261,19 +271,22 @@ public class Main {
                             System.out.println("Digite o ID do sobrevivente a ser adicionado a missao: ");
                             String IDsobrevivente = scan.nextLine();
                             if (vault.verificadordeID(IDsobrevivente)
-                                    && !vault.verificadorDeSobreviventeRepetido(IDsobrevivente, nomeMissao)
-                                    && !vault.verificadorDeMorto(IDsobrevivente)
-                                    && !vault.verificadorDeDoente(IDsobrevivente)) {
+                                    && !vault.verificadorDeSobreviventeRepetido(IDsobrevivente, nomeMissao)) {
+                                if (!vault.verificadorDeMorto(IDsobrevivente)
+                                        && !vault.verificadorDeDoente(IDsobrevivente)) {
+                                    vault.adicionarSobreviventeMissao(IDsobrevivente, nomeMissao);
+                                } else {
+                                    System.err.println(RED + "Sobrevivente morto ou doente" + WHITE);
+                                }
 
-                                vault.adicionarSobreviventeMissao(IDsobrevivente, nomeMissao);
                             } else {
-                                System.err.println("Sobrevivente ja cadastrado na missão ou ID invalido");
+                                System.err.println(RED + "Sobrevivente ja cadastrado na missão ou ID invalido" + WHITE);
                             }
                         } else {
-                            System.err.println("Missao nao encontrada");
+                            System.err.println(RED + "Missao nao encontrada" + WHITE);
                         }
                     } else {
-                        System.err.println("Não há missoes ou sobreviventes cadastrados");
+                        System.err.println(RED + "Não há missoes ou sobreviventes cadastrados" + WHITE);
                     }
                     break;
 
@@ -283,7 +296,7 @@ public class Main {
                     if (vault.getSobreviventes().size() != 0) {
                         vault.imprimirSobreviventes();
                     } else {
-                        System.err.println("Nao ha sobreviventes cadastrados");
+                        System.err.println(RED + "Nao ha sobreviventes cadastrados" + WHITE);
 
                     }
                     break;
@@ -301,23 +314,25 @@ public class Main {
                         vault.imprimirMissoes();
                         break;
                     } else {
-                        System.err.println("Não há missoẽs cadastradas");
+                        System.err.println(RED + "Não há missoẽs cadastradas" + WHITE);
                         break;
                     }
                 }
 
                 case 11: {
                     if (vault.getMissoes().size() != 0) {
-                        vault.imprimirMissoes();
+                        vault.imprimirNomeMissoes();
                         System.out.println("Digite o nome da missao para exibir os sobreviventes: ");
                         String nomeMissao = scan.nextLine();
                         Missao missao = vault.procurarMissao(nomeMissao);
                         if (missao != null) {
                             vault.imprimirSobreviventesDaMissao(missao);
                         } else {
-                            System.err.println("Missao não encontrada");
+                            System.err.println(RED + "Missao não encontrada" + WHITE);
                         }
 
+                    } else {
+                        System.err.println(RED + "Não há missoẽs cadastradas" + WHITE);
                     }
                     break;
 
@@ -332,7 +347,7 @@ public class Main {
                 }
 
                 default: {
-                    System.out.println("Digite uma opcao valida");
+                    System.out.println(RED + "Digite uma opcao valida" + WHITE);
                     break;
                 }
             }
