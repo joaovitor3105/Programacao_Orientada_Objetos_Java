@@ -116,11 +116,11 @@
     }
 
     Pessoa <|-- Sobrevivente 
-    Vault  *-- "*" Sobrevivente 
-    Vault  *-- "*" Recurso 
-    Vault  *-- "*" Missao 
-    Missao  *-- "*" Recurso 
-    Missao  --> "0..5" Sobrevivente
+    Vault  "1"*-- "*" Sobrevivente 
+    Vault  "1"*-- "*" Recurso 
+    Vault  "1"*-- "*" Missao 
+    Missao  "1"*-- "*" Recurso 
+    Missao "1" --> "0..5" Sobrevivente
      Sobrevivente --> "0..3" Habilidade 
     Sobrevivente --> "1" Status 
     Recurso --> "1" Nome 
