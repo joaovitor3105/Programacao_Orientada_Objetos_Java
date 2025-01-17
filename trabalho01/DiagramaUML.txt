@@ -12,18 +12,13 @@
     }
 
     class Sobrevivente {
-        -nome: String
-        -idade: int
-        -status: Status
         -habilidades: List<Habilidade>
-        +Sobrevivente(nome: String, idade: int, status: Status)
-        +getNome(): String
-        +getIdade(): int
-        +getStatus(): Status
-        +setStatus(status: Status): void
+        -status: Status
         +getHabilidades(): List<Habilidade>
+        +getStatus(): Status
         +adicionarHabilidade(habilidade: Habilidade): void
-        +imprimirNomeeID() : String
+        +imprimirHabilidades(): void
+        +imprimirNomeeID(): String
     }
 
     class Recurso {
@@ -35,13 +30,13 @@
         +setQuantidade(quantidade: int): void
     }
 
-    class Missao {
+ 
         class Missao {
         -nome: String
         -objetivo: String
         -local: String
         -sobreviventesID: List<String>
-        -recursos: List<Recursos>
+        -recursos: List<Recurso>
         -status_missao: Status_Missao
         +getNome(): String
         +getObjetivo(): String
@@ -54,7 +49,7 @@
         +imprimirSemRecursos(): String
     }
 
-    }
+    
 
     class Vault {
         -recursos: List<Recursos>
@@ -121,11 +116,11 @@
     }
 
     Pessoa <|-- Sobrevivente 
-    Vault "1" *-- "*" Sobrevivente 
-    Vault "1" *-- "*" Recurso 
-    Vault "1" *-- "*" Missao 
-    Missao "1" *-- "*" Recurso 
-    Missao "1" --> "*" Sobrevivente
+    Vault  *-- "*" Sobrevivente 
+    Vault  *-- "*" Recurso 
+    Vault  *-- "*" Missao 
+    Missao  *-- "*" Recurso 
+    Missao  --> "0..5" Sobrevivente
      Sobrevivente --> "0..3" Habilidade 
     Sobrevivente --> "1" Status 
     Recurso --> "1" Nome 
