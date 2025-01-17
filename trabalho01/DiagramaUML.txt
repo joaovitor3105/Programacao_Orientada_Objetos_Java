@@ -36,57 +36,56 @@
     }
 
     class Missao {
+        class Missao {
         -nome: String
         -objetivo: String
         -local: String
-        -sobreviventes: List<Sobrevivente>
+        -sobreviventesID: List<String>
         -recursos: List<Recursos>
-        -status: Status_Missao
-        +Missao(nome: String, objetivo: String, local: String, status: Status_Missao)
+        -status_missao: Status_Missao
         +getNome(): String
         +getObjetivo(): String
         +getLocal(): String
-        +getSobreviventes(): List<Sobrevivente>
-        +getRecursos(): List<Recursos>
         +getStatus(): Status_Missao
-        +adicionarSobrevivente(sobrevivente: Sobrevivente): void
-        +removerSobrevivente(sobrevivente: Sobrevivente): void
-        +adicionarRecurso(recurso: Recursos): void
-        +removerRecurso(recurso: Recursos): void
-        +atualizarStatus(status: Status_Missao): void
+        +getSobreviventes(): List<String>
+        +adicionarIDSobrevivente(id: String): void
+        +removerIDSobrevivente(id: String): void
+        +adicionarRecurso(nome: Nome, quantidade: int): void
+        +imprimirSemRecursos(): String
+    }
+
     }
 
     class Vault {
         -recursos: List<Recursos>
         -sobreviventes: List<Sobrevivente>
         -missoes: List<Missao>
-        +Vault()
         +getRecursos(): List<Recursos>
         +getSobreviventes(): List<Sobrevivente>
+        +getMissoes(): List<Missao>
         +adicionarSobrevivente(sobrevivente: Sobrevivente): void
-        +removerSobrevivente(nome: String): void
-        +buscarSobrevivente(nome: String): Sobrevivente
+        +adicionarMissao(missao: Missao): void
+        +procurarSobrevivente(ID: String): Sobrevivente
+        +procurarMissao(nome: String): Missao
+        +adicionarHabilidade(ID: String, habilidade: Habilidade): void
+        +removerHabilidade(ID: String): void
         +imprimirNomeSobreviventes(): void
         +adicionarRecurso(nome: Nome, quantidade: int): void
-        +removerRecurso(nome: Nome, quantidade: int): void
+        +consumirRecurso(nome: Nome, quantidade: int): void
         +imprimirRecursos(): void
-        +adicionarMissao(missao: Missao): void
-        +removerMissao(missao: Missao): void
-        +getMissoes(): List<Missao>
         +imprimirMissoes(): void
-        +verificarRecursosSuficientes(nome: Nome, quantidade: int): boolean
-        +atualizarStatusSobrevivente(nome: String, novoStatus: Status): void
-        +verificadordeID(id: String): boolean
-        +verificadorDeMorto(id: String): boolean
-        +procurarSobrevivente(id: String): Sobrevivente
-        +verificarHabilidadeRepetida(id: String, habilidade: Habilidade): boolean
-        +adicionarHabilidade(id: String, habilidade: Habilidade): void
-        +removerHabilidade(id: String): void
-        +adicionarRecursoMissao(nome: String): void
-        +procurarMissao(nome: String): Missao
         +imprimirNomeMissoes(): void
-        +void imprimirNomeeIDs() : String
-        
+        +adicionarSobreviventeMissao(ID: String, nomeMissao: String): void
+        +imprimirSobreviventes(): void
+        +verificarHabilidadeRepetida(ID: String, habilidade: Habilidade): boolean
+        +verificadordeID(ID: String): boolean
+        +verificadorDeSobreviventeRepetido(ID: String, nomemissao: String): boolean
+        +verificadordemissaopornome(nome: String): boolean
+        +verificadorDeMorto(ID: String): boolean
+        +verificadorDeDoente(ID: String): boolean
+        +adicionarRecursoMissao(nome_missao: String): void
+        +imprimirSobreviventesDaMissao(missao: Missao): void
+        +imprimirNomeeIDs(): void
     }
     
     enum Status_Missao {
