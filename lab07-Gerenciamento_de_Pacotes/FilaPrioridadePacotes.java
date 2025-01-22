@@ -17,4 +17,8 @@ public class FilaPrioridadePacotes {
             System.out.println(pacote);
         }
     }
+
+    public boolean isEmpty() {
+        return filaPrioridade.isEmpty();
+    }
 }

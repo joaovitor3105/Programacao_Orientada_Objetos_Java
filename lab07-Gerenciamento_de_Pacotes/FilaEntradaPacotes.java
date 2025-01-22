@@ -18,4 +18,8 @@ public class FilaEntradaPacotes {
             System.out.println(pacote);
         }
     }
+
+    public boolean isEmpty() {
+        return fila.isEmpty();
+    }
 }

@@ -13,8 +13,8 @@ public class GerenciamentoPacotes {
         while (true) {
             System.out.println("MENU");
             System.out.println("1 -Adicionar um novo cliente à lista de clientes");
-            System.out.println("2 - Registrar um novo Pacote");
-            System.out.println("3 - Processar o próximo pacote");
+            System.out.println("2 -Registrar um novo Pacote");
+            System.out.println("3 -Processar o próximo pacote");
             System.out.println("4 -Exibir os pacotes na fila de entrada");
             System.out.println("5 -Exibir os pacotes na fila de prioridade");
             System.out.println("6 -Exibir o histórico de pacotes entregues");
@@ -64,15 +64,18 @@ public class GerenciamentoPacotes {
                     break;
 
                 case 3:
-                    if (filaPrioridade != null) {
+                    if (!filaPrioridade.isEmpty()) {
                         Pacote pacote2 = filaPrioridade.removerPacote();
                         historico.adicionarAoHistorico(pacote2);
-                    } else {
+                        System.out.println("Pacote entregue com sucesso!");
+                    } else if (!filaEntrada.isEmpty()) {
                         Pacote pacote2 = filaEntrada.removerPacote();
                         historico.adicionarAoHistorico(pacote2);
+                        System.out.println("Pacote entregue com sucesso!");
+                    } else {
+                        System.out.println("Não há pacotes para serem entregues!");
                     }
 
-                    System.out.println("Pacote entregue com sucesso!");
                     break;
 
                 case 4:
