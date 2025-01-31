@@ -4,16 +4,18 @@ public class Produto {
     private double preco;
     private int estoque;
 
-    Produto(int codigo, String descricao, double preco, int estoque) {
+    public Produto(int codigo, String descricao, double preco, int estoque) {
         this.codigo = codigo;
         this.descricao = descricao;
         this.preco = preco;
         this.estoque = estoque;
     }
 
-    Produto(int codigo, String descricao) {
+    public Produto(int codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
+        this.preco = 10;
+        this.estoque = 5;
 
     }
 
