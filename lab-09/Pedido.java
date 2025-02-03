@@ -50,6 +50,7 @@ public class Pedido {
         this.total = total;
     }
 
+    @Override
     public String toString() {
         String str = "Pedido: " + this.codigoPedido + " Cliente: " + this.clienteNome + "\n";
         for (Produto produto : this.itens) {

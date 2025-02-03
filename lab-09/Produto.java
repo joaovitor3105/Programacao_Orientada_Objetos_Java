@@ -52,13 +52,13 @@ public class Produto {
     }
 
     public void reduzirEstoque(int quantidade) {
-        if (quantidade > 0) {
+        if (quantidade > 0 && quantidade <= this.estoque) {
             this.estoque -= quantidade;
         }
     }
 
-    public String tooString() {
-        return "Código: " + this.codigo + " Descrição: " + this.descricao + " Preço: " + this.preco + " Estoque: "
-                + this.estoque;
+    @Override
+    public String toString() {
+        return "Código: " + this.codigo + " Descrição: " + this.descricao + " Preço: " + this.preco;
     }
 }

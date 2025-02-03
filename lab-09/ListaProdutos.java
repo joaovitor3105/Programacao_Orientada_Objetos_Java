@@ -37,6 +37,7 @@ public class ListaProdutos<T> {
             while (atual != null) {
                 System.out.println(i + " - " + atual.obterValor());
                 atual = atual.obterProx();
+                i++;
             }
             System.out.println();
         }

@@ -70,8 +70,8 @@ public class GerenciamentoEcommerce {
                                 System.out.println("Produto não encontrado");
                                 break;
                             }
+                            p.reduzirEstoque(1);
                             pedido.adicionarProduto(p);
-                            filaPedidos.adicionarPedido(pedido);
                             System.out.print("Digite 1 para adicionar mais produtos ou 2 para finalizar: ");
                             int opcaoPedido = scanner.nextInt();
                             scanner.nextLine();
